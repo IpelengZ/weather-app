@@ -1,4 +1,21 @@
-let apiKey = "8ocd344800t15729aafe29dbb6a3a7a9";
+function displayTemperature(response) {
+  let temperatureElement = document.querySelector("#current-temperature");
+  let temperature = Math.round(response.data.temperature.current);
+  let cityElement = document.querySelector("#current-city");
+  cityElement.innerHTML = response.data.city;
+  temperatureElement.innerHTML = temperature;
+}
+
+function search(event) {
+  event.preventDefault();
+  let searchInputElement = document.querySelector("#search-input");
+  let city = searchInputElement.value;
+
+  let apiKey = "b2a5adcct04b33178913oc335f405433";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayTemperature);
+}
 
 function formatDate(date) {
   let minutes = date.getMinutes();
@@ -20,34 +37,17 @@ function formatDate(date) {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday",
+    "Saturday"
   ];
 
   let formattedDay = days[day];
   return `${formattedDay} ${hours}:${minutes}`;
 }
 
-let currentDateElement = document.querySelector("#current-date");
-let currentDate = new Date();
-currentDateElement.innerHTML = formatDate(currentDate);
-
-function search(event) {
-  event.preventDefault();
-  let searchInputElement = document.querySelector("#search-input");
-  let city = searchInputElement.value;
-
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayTemperature);
-
-  let cityElement = document.querySelector("#current-city");
-  cityElement.innerHTML = city;
-}
-
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
 
-function displayTemperature(response) {
-  let temperature = Math.round(response.data.temperature.current);
-  let temperatureElement = document.querySelector(".current-temperature-value");
-  temperatureElement.innerHTML = `${temperature}`;
-}
+let currentDateELement = document.querySelector("#current-date");
+let currentDate = new Date();
+
+currentDateELement.innerHTML = formatDate(currentDate);
