@@ -11,7 +11,7 @@ function search(event) {
   let searchInputElement = document.querySelector("#search-input");
   let city = searchInputElement.value;
 
-  let apiKey = "8ocd344800t15729aafe29dbb6a3a7a9";
+  let apiKey = "b2a5adcct04b33178913oc335f405433";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayTemperature);
@@ -50,4 +50,4 @@ searchForm.addEventListener("submit", search);
 let currentDateElement = document.querySelector("#current-date");
 let currentDate = new Date();
 
-currentDateELement.innerHTML = formatDate(currentDate);
+currentDateElement.innerHTML = formatDate(currentDate);
